@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TDTC | 구태훈 포트폴리오</title>
+  <meta name="description" content="KT 에이블스쿨 9기 팀 프로젝트 TDTC: CCTV 영상으로 전통시장 인파 밀집도와 위험도를 실시간 분석하는 관제 AI">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+  <header class="nav">
+    <a href="../index.html" class="logo">Koo</a>
+    <nav>
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#skills">Skills</a>
+      <a href="../index.html#projects">Projects</a>
+      <a href="../index.html#contact">Contact</a>
+      <button id="theme-toggle" aria-label="테마 전환">◐</button>
+    </nav>
+  </header>
+
+  <main class="detail">
+    <a class="back-link" href="../index.html#projects">← 프로젝트 목록</a>
+
+    <div class="detail-hero">
+      <p class="eyebrow">KT 에이블스쿨 9기 AI트랙 · 팀 프로젝트</p>
+      <h1>TDTC · 시켜줘 네 장터매니저<br>전통시장 인파 분석·안전탐지 관제 AI</h1>
+      <p class="sub">
+        CCTV 영상으로 전통시장의 인파 밀집도와 위험도(CRI)를 실시간 분석하고,
+        위험이 이어지면 관제 화면 경보와 자동 신고까지 연결하는 B2G 솔루션입니다.
+      </p>
+      <div class="chips">
+        <span class="hl">에이블스쿨 우수상</span>
+        <span>7인 팀</span>
+        <span>2026.07 ~ 2026.08 (8주)</span>
+        <span>B2G · 한국관광공사</span>
+      </div>
+    </div>
+
+    <!-- 1. 개요 -->
+    <section class="reveal">
+      <h2>개요</h2>
+      <p>
+        전통시장은 통로가 좁고 구조가 복잡해 사람이 몰리면 위험이 빠르게 커지지만, 현장은 CCTV를
+        사람이 눈으로 지켜보는 데 그쳐 사고가 난 뒤에야 대응이 시작됩니다.
+        한국관광공사의 「2026 AI 기반 지역관광 문제해결」 공고와 정부의 AI 기반 인파관리 확산 방향에서 출발해,
+        <strong>관제 요원이 놓치기 쉬운 밀집 위험을 영상에서 먼저 읽는 시스템</strong>을 목표로 했습니다.
+      </p>
+      <div class="two-col">
+        <div class="box">
+          <h4>디지털 트윈 정책 시뮬레이션</h4>
+          <ul>
+            <li>정책 공문에서 조건을 자동 추출해 시나리오 설정</li>
+            <li>에이전트 기반 모델(Mesa)로 정책 적용 전·후 비교</li>
+            <li>3D 시각화와 RAG 기반 보고서 초안 생성</li>
+          </ul>
+        </div>
+        <div class="box">
+          <h4>CCTV 영상 관제 대시보드 <span style="color:var(--accent)">· 제가 속한 파트</span></h4>
+          <ul>
+            <li>CCTV 영상에서 구역별 인원·밀집도 산출</li>
+            <li>위험도(CRI) 계산과 실시간 시각화</li>
+            <li>위험 상태가 지속되면 경보와 자동 신고</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. 내 역할 -->
+    <section class="reveal">
+      <h2>내가 맡은 일</h2>
+      <p>CCTV 영상 관제 대시보드 파트를 3명이 나눠 맡았고, 저는 AI 추론 서버와 위험도 계산, LiDAR 검토를 담당했습니다.</p>
+      <ul class="plain">
+        <li><strong>CSRNet 학습·평가</strong> — 고밀도 군중에 맞는 밀도 추정 모델을 학습하고 현장 영상으로 검증</li>
+        <li><strong>군중 위험도 알고리즘</strong> — 구역별 밀집도를 행정안전부 기준(위험 6명/㎡ 이상)에 맞춰 위험도로 환산</li>
+        <li><strong>FastAPI 기반 관제 서버</strong> — 영상 추론과 지표를 대시보드·백엔드로 전달</li>
+        <li><strong>AWS S3 영상·DB 적재</strong> — 분석 결과와 영상을 백엔드와 연동해 저장</li>
+        <li><strong>LiDAR 3D 탐지 학습과 퓨전 검토</strong> — 도입, 결합 실험, 제거 결정까지 (아래 참고)</li>
+      </ul>
+      <p style="font-size:0.9rem">YOLO11n 기반 2D 탐지·모자이크 파트는 팀원이 담당했고, 그 결과를 서버에서 함께 연결했습니다.</p>
+    </section>
+
+    <!-- 3. 파이프라인 -->
+    <section class="reveal">
+      <h2>CCTV 분석 파이프라인</h2>
+      <div class="flow">
+        <div class="node">CCTV 영상<small>비식별 처리</small></div><span class="arrow">→</span>
+        <div class="node">프레임 추출</div><span class="arrow">→</span>
+        <div class="node hl">CSRNet 밀도맵<small>인원수·위치</small></div><span class="arrow">→</span>
+        <div class="node hl">구역별 지표<small>밀집도 → CRI</small></div><span class="arrow">→</span>
+        <div class="node">대시보드</div><span class="arrow">→</span>
+        <div class="node out">경보·자동 신고<small>CRI 70 이상 15초 지속</small></div>
+      </div>
+      <h3>시스템 구성</h3>
+      <div class="flow">
+        <div class="node">React 웹<small>S3 + CloudFront</small></div><span class="arrow">→</span>
+        <div class="node">nginx<small>EC2 · Docker Compose</small></div><span class="arrow">→</span>
+        <div class="node">Spring Boot API</div><span class="arrow">↔</span>
+        <div class="node hl">FastAPI<small>CCTV AI · 시뮬레이션</small></div>
+      </div>
+      <div class="flow">
+        <div class="node out">PostgreSQL</div>
+        <div class="node out">AWS S3<small>영상 · 문서</small></div>
+        <div class="node out">OpenAI API<small>보고서 생성</small></div>
+      </div>
+      <p>
+        클라우드에 GPU 서버를 두면 비용 부담이 커서, AI 추론은 로컬 GPU에서 돌리고 터널링으로 대시보드와 연결하는 구성으로 바꿨습니다.
+      </p>
+    </section>
+
+    <!-- 4. 문제 해결 -->
+    <section class="reveal">
+      <h2>문제를 풀어간 과정</h2>
+
+      <h3>1. 탐지 모델에서 밀도 추정 모델로 전환</h3>
+      <p>
+        처음에는 경량 탐지 모델 YOLO11n으로 인원을 세려 했지만, 데이터가 박스가 아니라
+        <strong>사람 머리 점 좌표</strong>로 라벨링되어 있었고 군중이 겹치는 구간에서 탐지율이 급감했습니다.
+      </p>
+      <ol class="steps">
+        <li><b>YOLO11n 초기 평가</b> — mAP@50 0.605. 학습량 부족과 야간 화질 저하로 낮게 나옴.</li>
+        <li><b>가상 박스 보강</b> — 헤드 포인트를 중심으로 80px 가상 박스를 생성해 mAP@50 0.808까지 개선했지만, 학습에 쓰지 않은 현장 영상에서는 흔들림과 오탐이 남음.</li>
+        <li><b>CSRNet으로 전환</b> — 박스 대신 픽셀 단위 밀도맵을 만들고 적분해 인원을 계산. 학습 데이터 6만 장 이상, KDTree 기반 적응형 가우시안 커널로 정답 밀도맵을 생성.</li>
+        <li><b>불안정성 진단</b> — 초기 모델(MAE 4.4)은 환경이 다른 영상에서 실제보다 8~10명 적게, 비슷한 환경에서는 130명으로 크게 과대 예측. 특정 환경 데이터에 과적합된 것이 원인.</li>
+        <li><b>튜닝</b> — 증강(Random Crop, Color Jitter, Flip)과 후반부 과적합 확인 후 가장 일반화가 좋은 <b>Epoch 8</b> 가중치 선정. 후처리 임계값 오류로 생기던 히트맵 노이즈도 수정.</li>
+      </ol>
+      <div class="stat-row">
+        <div class="stat"><div class="n">0.605 → 0.808</div><div class="l">YOLO11n mAP@50 (한계 확인)</div></div>
+        <div class="stat"><div class="n">4.4 → 1.84</div><div class="l">CSRNet MAE (초기 → 최종)</div></div>
+        <div class="stat"><div class="n">75%+</div><div class="l">실제 인원과 시각적 일치</div></div>
+      </div>
+      <p>YOLO11n은 버리지 않고 빠른 처리 속도를 살려 <strong>실시간 얼굴 모자이크</strong>로 역할을 바꿨습니다. 모델마다 잘하는 일을 나눠 맡긴 셈입니다.</p>
+
+      <h3>2. LiDAR 도입, 검증, 제거</h3>
+      <p>
+        영상 기반 밀도(픽셀 공간)를 실제 단위의 공간 점유율로 보완·검증할 수 있는지 보려고 LiDAR를 검토했습니다.
+        PointPillars 백본과 CenterPoint 헤드로 3D 탐지 파이프라인을 만들고, CSRNet 결과와 합친 종합 스코어링을 실험했습니다.
+      </p>
+      <div class="callout">
+        <strong>결과</strong> — LiDAR를 더하자 오히려 CSRNet의 성능이 떨어졌습니다.
+        결합을 고집하지 않고 <strong>LiDAR를 제거하고 CCTV 중심으로 범위를 좁히기로</strong> 결정했습니다.
+        기능을 더하는 것보다, 실제로 개선되는지 측정하고 안 되면 빼는 판단이 더 중요하다는 걸 배운 경험입니다.
+      </div>
+    </section>
+
+    <!-- 5. 산출물 -->
+    <section class="reveal">
+      <h2>기획·설계 산출물</h2>
+      <p>8주 동안 주차별로 산출물을 쌓아가며 진행했습니다. 아래는 핵심 문서의 요약입니다.</p>
+      <div class="two-col">
+        <div class="box"><h4>과제 심의 (1~2주)</h4><p>과제 정의서, 요구사항 정의서, 아키텍처 정의서, 서비스 플로우, ERD, UI/UX 설계서</p></div>
+        <div class="box"><h4>타당성 검토 (3~5주)</h4><p>데이터 정의서(공공데이터·AI Hub 출처와 사용 권한 정리), AI 모델 정의서(YOLO11n, CSRNet)</p></div>
+        <div class="box"><h4>품질 평가·완료 (6~8주)</h4><p>최종 발표 PPT, 1페이지 솔루션 설명서, 시연 영상, 소스 코드</p></div>
+      </div>
+      <h3>요구사항 정의서 발췌</h3>
+      <div class="table-wrap">
+        <table class="spec">
+          <tr><th>ID</th><th>요구사항</th><th>핵심 내용</th><th>중요도</th></tr>
+          <tr><td>SRV-11-07001</td><td>소프트웨어 아키텍처 설계</td><td>Front-end / Back-end / DB 3-Tier 구조로 확장성과 안정성 확보</td><td>상</td></tr>
+          <tr><td>USR-01-10003</td><td>개인정보 암호화</td><td>비밀번호 SHA-256 이상 해시 적용</td><td>상</td></tr>
+          <tr><td>USR-03-25008</td><td>관리자 대시보드</td><td>밀집도·방문객수·위험도·실시간 알림 시각화</td><td>상</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- 6. 결과와 한계 -->
+    <section class="reveal">
+      <h2>결과와 한계</h2>
+      <ul class="plain">
+        <li><strong>결과</strong> — KT 에이블스쿨 9기 우수상. CCTV 영상에서 위험도 산출, 관제 대시보드, 경보·자동 신고까지 한 흐름으로 연결.</li>
+        <li><strong>한계 1</strong> — 지자체 CCTV 자료를 받지 못해 망원시장에서 직접 촬영한 영상 등으로 검증했습니다. 실제 설치 환경과는 차이가 있을 수 있습니다.</li>
+        <li><strong>한계 2</strong> — "위험 상황 조기 대응 시간 30% 단축"은 실증 전 단계의 자체 목표 KPI이며 아직 검증되지 않았습니다.</li>
+        <li><strong>다음에 한다면</strong> — 다양한 시간대·카메라 각도의 영상으로 평가셋을 따로 만들어, 환경이 바뀔 때의 오차를 정량적으로 확인하겠습니다.</li>
+      </ul>
+      <p style="margin-top:20px">
+        <a class="more-link" href="https://github.com/StrongestTeam10/TDTC-AI-CCTV" target="_blank" rel="noopener">GitHub 저장소 (AI 분석 서버) ↗</a>
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© <span id="year"></span> Koo. Built with HTML, CSS, JS.</p>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

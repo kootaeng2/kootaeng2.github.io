@@ -65,7 +65,7 @@
       <div class="skill-grid">
         <div class="skill-card">
           <h3>Computer Vision</h3>
-          <div class="tags"><span>YOLO11</span><span>CSRNet</span><span>BEV 좌표 변환</span><span>모자이크 비식별화</span></div>
+          <div class="tags"><span>YOLO11</span><span>CSRNet</span><span>PointPillars (LiDAR)</span><span>모자이크 비식별화</span></div>
         </div>
         <div class="skill-card">
           <h3>ML / Training</h3>
@@ -88,35 +88,21 @@
 
       <article class="project featured">
         <div class="project-head">
-          <h3>TDTC · 전통시장 CCTV AI 혼잡도·위험도 분석 서버</h3>
-          <span class="badge">Smart City · B2G</span>
+          <h3>TDTC · 전통시장 CCTV 인파 분석·안전탐지 관제 AI</h3>
+          <span class="badge">에이블스쿨 우수상 · B2G</span>
         </div>
         <p class="summary">
-          망원시장 3개 구역의 CCTV 영상을 실시간으로 분석해 인파 밀집도와 구역별 위험도(CRI)를 계산하고,
-          위험 감지 시 비상 클립과 알람을 백엔드로 전달하는 AI 분석 서버. 8개의 B2B/B2G 후보 아이디어를 비교한 끝에
-          중대재해처벌법이라는 규제 근거와 명확한 고객 예산, 2개월 내 구현 가능성을 기준으로 선정했습니다.
+          KT 에이블스쿨 9기 팀 프로젝트(7인). CCTV 영상으로 전통시장의 인파 밀집도와 위험도를 실시간 분석하고,
+          위험이 지속되면 경보와 자동 신고까지 연결합니다. 저는 CSRNet 학습·평가, 군중 위험도 알고리즘,
+          FastAPI 관제 서버, LiDAR 퓨전 검토를 맡았습니다.
         </p>
         <ul class="points">
-          <li>
-            <strong>실시간 비전 AI 추론</strong> —
-            YOLO11n으로 보행자를 검출하며 모자이크 비식별화를 적용하고, CSRNet 밀도 추정과 BEV(조감도) 좌표 변환으로
-            인파 밀집도를 산출. RTX 4060 환경에서 30 FPS 추론·스트리밍
-          </li>
-          <li>
-            <strong>2-Track 파이프라인 설계</strong> —
-            실시간 관제(MJPEG·WebSocket, Cloudflare Tunnel)와 아카이빙(1분 단위 모자이크 영상은 S3, 메트릭은 백엔드를 거쳐 RDS PostgreSQL)을 분리
-          </li>
-          <li>
-            <strong>위험 감지와 알람 연동</strong> —
-            위험 감지 시 35초 원형 버퍼로 비상 클립을 만들어 S3에 저장하고, Webhook으로 백엔드에 알람 이력 전달
-          </li>
-          <li>
-            <strong>팀 협업 구조</strong> —
-            AI 서버, 백엔드, 프론트엔드, 시뮬레이션이 REST API·WebSocket으로 연결된 다중 팀 파이프라인에서 AI 서버 개발
-          </li>
+          <li><strong>탐지 → 밀도 추정 전환</strong> — YOLO11n의 한계를 확인하고 CSRNet으로 전환해 MAE 4.4에서 1.84까지 개선</li>
+          <li><strong>측정 기반 의사결정</strong> — LiDAR 결합이 오히려 성능을 떨어뜨리는 것을 확인하고 제거</li>
         </ul>
-        <div class="tags"><span>YOLO11</span><span>CSRNet</span><span>PyTorch</span><span>FastAPI</span><span>AWS S3 · RDS</span><span>Cloudflare Tunnel</span></div>
+        <div class="tags"><span>CSRNet</span><span>YOLO11</span><span>PyTorch</span><span>FastAPI</span><span>AWS S3</span><span>PointPillars</span></div>
         <div class="links">
+          <a href="projects/tdtc.html" class="link">자세히 보기 →</a>
           <a href="https://github.com/StrongestTeam10/TDTC-AI-CCTV" class="link" target="_blank" rel="noopener">GitHub ↗</a>
         </div>
       </article>
