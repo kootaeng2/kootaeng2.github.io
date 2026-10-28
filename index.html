@@ -129,6 +129,32 @@
 
       <article class="project">
         <div class="project-head">
+          <h3>감정 분석 기반 콘텐츠 추천 일기 앱</h3>
+          <span class="badge">NLP · Web App</span>
+        </div>
+        <p class="summary">
+          일기에 담긴 감정을 분석하고, 감정에 맞춰 영화·음악·책을 추천하는 감성 비서 웹 앱.
+          klue/roberta-base를 파인튜닝해 감정을 분류하고(Accuracy 0.79), 감정을 받아들이는 '수용'과
+          기분을 바꾸는 '전환' 두 가지 방식으로 콘텐츠를 큐레이션합니다.
+        </p>
+        <ul class="points">
+          <li>
+            <strong>앱·모델 분리 배포 구조</strong> —
+            가벼운 앱 코드와 무거운 AI 모델을 분리하고, GitHub Actions로 Hugging Face Spaces에 자동 배포
+          </li>
+          <li>
+            <strong>서비스 기능</strong> —
+            로그인, 감정 달력 기록, 테마 설정, Supabase(PostgreSQL) 기반 데이터 저장
+          </li>
+        </ul>
+        <div class="tags"><span>Flask</span><span>PyTorch</span><span>Transformers</span><span>Supabase</span><span>Docker</span><span>GitHub Actions</span></div>
+        <div class="links">
+          <a href="https://github.com/kootaeng2/Emotion-Chatbot-App" class="link" target="_blank" rel="noopener">GitHub ↗</a>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="project-head">
           <h3>수어 기반 긴급 신고 앱 (기획)</h3>
           <span class="badge">AI Track · B2G</span>
         </div>
