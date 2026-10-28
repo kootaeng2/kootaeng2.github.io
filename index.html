@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Koo | Portfolio</title>
-  <meta name="description" content="컴퓨터 비전·LiDAR 기반 공공안전 AI를 만드는 Koo의 포트폴리오">
+  <meta name="description" content="컴퓨터 비전 기반 공공안전 AI를 만드는 Koo의 포트폴리오">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -24,11 +24,11 @@
 
     <!-- HERO -->
     <section class="hero">
-      <p class="eyebrow">Computer Vision · LiDAR · Public Safety AI</p>
+      <p class="eyebrow">Computer Vision · Crowd Analysis · Public Safety AI</p>
       <h1>사람이 모이는 곳의 <span class="accent">위험</span>을<br>데이터로 먼저 읽습니다.</h1>
       <p class="lead">
-        CCTV 영상과 LiDAR 3D 포인트 클라우드를 결합해 전통시장의 혼잡도와 위험도를 분석하는
-        스마트시티·공공안전 프로젝트를 개발하고 있습니다.
+        CCTV 영상을 AI로 분석해 전통시장의 혼잡도와 위험도를 실시간으로 계산하는
+        스마트시티·공공안전 프로젝트의 AI 분석 서버를 개발하고 있습니다.
       </p>
       <div class="cta">
         <a class="btn primary" href="#projects">프로젝트 보기</a>
@@ -46,14 +46,13 @@
           AI가 실제로 쓰이는 문제에 관심을 가져왔습니다.
         </p>
         <p>
-          현재는 여러 팀이 함께하는 파이프라인에서 CCTV 기반 컴퓨터 비전, LiDAR 기반 3D 객체 탐지,
-          시뮬레이션·리포팅 레이어를 연결하는 일을 하고 있습니다. 지자체·소방 같은
-          B2G 고객이 실제로 쓸 수 있는 서비스를 목표로, 기술 선택의 근거를 문서로 남기는 것을 중요하게 생각합니다.
+          현재는 백엔드·프론트엔드·시뮬레이션 팀이 함께하는 파이프라인에서 CCTV 기반 AI 분석 서버를 맡고 있습니다.
+          지자체·소방 같은 B2G 고객이 실제로 쓸 수 있는 서비스를 목표로, 기술 선택의 근거를 문서로 남기는 것을 중요하게 생각합니다.
         </p>
       </div>
       <ul class="facts">
         <li><span>전공</span>휴먼·로봇융합 + 컴퓨터공학 (복수전공)</li>
-        <li><span>관심 분야</span>컴퓨터 비전, 3D 인식, 센서 퓨전</li>
+        <li><span>관심 분야</span>컴퓨터 비전, 군중 밀집도 분석, 실시간 AI 서비스</li>
         <li><span>도메인</span>스마트시티, 공공안전 (B2G)</li>
       </ul>
     </section>
@@ -64,19 +63,19 @@
       <div class="skill-grid">
         <div class="skill-card">
           <h3>Computer Vision</h3>
-          <div class="tags"><span>YOLO</span><span>CSRNet</span><span>OpenCV</span><span>Homography</span><span>ORB · RANSAC</span><span>Kalman Filter</span></div>
-        </div>
-        <div class="skill-card">
-          <h3>3D / LiDAR</h3>
-          <div class="tags"><span>PointPillars</span><span>CenterPoint</span><span>DBSCAN</span><span>Point Cloud</span></div>
+          <div class="tags"><span>YOLO11</span><span>CSRNet</span><span>BEV 좌표 변환</span><span>모자이크 비식별화</span></div>
         </div>
         <div class="skill-card">
           <h3>ML / Training</h3>
-          <div class="tags"><span>Python</span><span>PyTorch</span><span>AMP (bfloat16)</span><span>Google Colab (A100)</span></div>
+          <div class="tags"><span>Python</span><span>PyTorch</span><span>Google Colab (A100)</span></div>
         </div>
         <div class="skill-card">
-          <h3>Data &amp; Infra</h3>
-          <div class="tags"><span>AI Hub 데이터셋</span><span>Serverless GPU 비용 설계</span><span>Git / GitHub</span></div>
+          <h3>Backend / Streaming</h3>
+          <div class="tags"><span>FastAPI</span><span>WebSocket</span><span>MJPEG 스트리밍</span><span>Swagger</span></div>
+        </div>
+        <div class="skill-card">
+          <h3>Cloud &amp; Tools</h3>
+          <div class="tags"><span>AWS S3 · RDS</span><span>Cloudflare Tunnel</span><span>Git / GitHub</span></div>
         </div>
       </div>
     </section>
@@ -87,41 +86,34 @@
 
       <article class="project featured">
         <div class="project-head">
-          <h3>TDTC · 전통시장 혼잡도·위험도 분석 시스템</h3>
+          <h3>TDTC · 전통시장 CCTV AI 혼잡도·위험도 분석 서버</h3>
           <span class="badge">Smart City · B2G</span>
         </div>
         <p class="summary">
-          CCTV와 LiDAR를 결합해 전통시장의 군중 밀집도를 분석하고 위험 점수를 산출하는 공공안전 시스템.
-          8개의 B2B/B2G 후보 아이디어를 비교한 끝에, 중대재해처벌법이라는 규제 근거와 명확한 고객 예산,
-          2개월 내 구현 가능성을 기준으로 선정했습니다.
+          망원시장 3개 구역의 CCTV 영상을 실시간으로 분석해 인파 밀집도와 구역별 위험도(CRI)를 계산하고,
+          위험 감지 시 비상 클립과 알람을 백엔드로 전달하는 AI 분석 서버. 8개의 B2B/B2G 후보 아이디어를 비교한 끝에
+          중대재해처벌법이라는 규제 근거와 명확한 고객 예산, 2개월 내 구현 가능성을 기준으로 선정했습니다.
         </p>
         <ul class="points">
           <li>
-            <strong>병렬 late-fusion 아키텍처 설계</strong> —
-            CCTV+YOLO(호모그래피로 실제 좌표 변환)를 주 런타임 파이프라인으로,
-            LiDAR/PointPillars를 검증 및 ground truth 생성용으로 분리
+            <strong>실시간 비전 AI 추론</strong> —
+            YOLO11n으로 보행자를 검출하며 모자이크 비식별화를 적용하고, CSRNet 밀도 추정과 BEV(조감도) 좌표 변환으로
+            인파 밀집도를 산출. RTX 4060 환경에서 30 FPS 추론·스트리밍
           </li>
           <li>
-            <strong>센서 퓨전 개념 정립</strong> —
-            CSRNet 히트맵(픽셀 공간 밀도)과 LiDAR 점유율(실제 단위)이 중복이 아닌 상호 보완 관계임을 정리하고,
-            Fruin의 Level of Service 같은 군중 안전 기준과 연결
+            <strong>2-Track 파이프라인 설계</strong> —
+            실시간 관제(MJPEG·WebSocket, Cloudflare Tunnel)와 아카이빙(1분 단위 모자이크 영상은 S3, 메트릭은 백엔드를 거쳐 RDS PostgreSQL)을 분리
           </li>
           <li>
-            <strong>영상 안정화</strong> —
-            전체 영상 안정화 대신 호모그래피 재투영 방식을 택하고,
-            ORB 특징 매칭 · RANSAC · Kalman 필터로 구역 할당을 안정화
+            <strong>위험 감지와 알람 연동</strong> —
+            위험 감지 시 35초 원형 버퍼로 비상 클립을 만들어 S3에 저장하고, Webhook으로 백엔드에 알람 이력 전달
           </li>
           <li>
-            <strong>LiDAR 모델 개발</strong> —
-            AI Hub 데이터로 PointPillars 계열 파이프라인을 Colab(A100)에서 구현.
-            max pooling(<code>scatter_reduce</code>), 8채널 pillar 피처, AMP(bfloat16) 학습 루프 적용
-          </li>
-          <li>
-            <strong>한계를 문서화</strong> —
-            일부 현장의 LiDAR가 가상 데이터라 퓨전 검증이 한 곳에서만 확인된 점을 보고서에 명시
+            <strong>팀 협업 구조</strong> —
+            AI 서버, 백엔드, 프론트엔드, 시뮬레이션이 REST API·WebSocket으로 연결된 다중 팀 파이프라인에서 AI 서버 개발
           </li>
         </ul>
-        <div class="tags"><span>YOLO</span><span>CSRNet</span><span>PointPillars</span><span>CenterPoint</span><span>DBSCAN</span><span>Homography</span></div>
+        <div class="tags"><span>YOLO11</span><span>CSRNet</span><span>PyTorch</span><span>FastAPI</span><span>AWS S3 · RDS</span><span>Cloudflare Tunnel</span></div>
         <div class="links">
           <a href="https://github.com/StrongestTeam10/TDTC-AI-CCTV" class="link" target="_blank" rel="noopener">GitHub ↗</a>
         </div>
