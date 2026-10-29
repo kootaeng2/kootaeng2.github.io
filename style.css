@@ -193,3 +193,5 @@ table.spec th, table.spec td { text-align: left; padding: 10px 12px; border-bott
 table.spec th { color: var(--text); font-weight: 700; white-space: nowrap; }
 .more-link { display: inline-block; margin-top: 14px; color: var(--accent); font-weight: 600; font-size: 0.92rem; }
 .more-link:hover { text-decoration: underline; }
+
+.two-col.even { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
